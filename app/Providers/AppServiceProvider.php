@@ -1,0 +1,30 @@
+<?php
+
+namespace sis5cs\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //añadido
+        Carbon::setLocale(config('app.locale'));
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
