@@ -77,7 +77,7 @@
      <td>{{$se->name}}</td>
 
       <td> 
-       <a href="{{url('/riesgos/seguimiento/'.$se->id_seguimiento.'/edit_fin')}}"> <button type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-saved"></span>Marcar fin</button> </a> 
+      <!--<a href="{{url('/riesgos/seguimiento/'.$se->id_seguimiento.'/edit_fin')}}"> <button type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-saved"></span>Marcar fin</button> </a>-->
       <a href="{{url('/riesgos/seguimiento/'.$se->id_seguimiento.'/edit_derivar')}}"><button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-user"></span>Derivar </button> </a> 
       </td>    
 

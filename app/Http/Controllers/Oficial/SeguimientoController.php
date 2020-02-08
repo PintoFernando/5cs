@@ -38,20 +38,18 @@ class SeguimientoController extends Controller
             alert()->info('Info', 'Seleccione un crédito')->showConfirmButton();
             return redirect('oficial/dashboard/');
         } else {
-            $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->get();
+            $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
             $existe_registros = Seguimiento::where('id_credito', Session::get('id_credito'))->exists();
             //---
-            if ($existe_registros) //si no existe registros
+            if ($existe_registros) //si existe
             {
                 if ($seguimiento->last()->usuario_destino == Auth::user()->id_users) {
-
                     if ($seguimiento->last()->id_users == Auth::user()->id_users) {
                         alert()->info('Info', 'Ya derivó a otra área')->showConfirmButton();
                         return redirect('oficial/seguimiento/');
                     } else {
                         return view('oficial.seguimiento.create');
                     }
-
                 } else {
                     alert()->info('Info', 'No tiene pendientes')->showConfirmButton();
                     return redirect('oficial/seguimiento/');
@@ -82,9 +80,9 @@ class SeguimientoController extends Controller
             return redirect('/oficial/seguimiento/');
         }
     }
-    public function edit_fin($id)
+    /*public function edit_fin($id)
     {
-        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->get();
+        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
         $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
         if ($seguimiento->last()->completado == true) {
             alert()->info('Info', 'Ya está completado')->showConfirmButton();
@@ -121,11 +119,10 @@ class SeguimientoController extends Controller
             alert()->info('Info', 'Exelente')->showConfirmButton();
             return redirect('/oficial/seguimiento');
         }
-    }
-
+    }*/
     public function edit_derivar($id)
     {
-        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->get();
+        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
         $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
         if ($seguimiento->last()->completado == true) {
             alert()->info('Info', 'Ya está completado')->showConfirmButton();
@@ -146,7 +143,6 @@ class SeguimientoController extends Controller
                     alert()->info('Info', 'Ya está completado')->showConfirmButton();
                     return redirect('oficial/seguimiento');
                 }
-
             } else {
                 alert()->info('Info', 'No corresponde')->showConfirmButton();
                 return redirect('oficial/seguimiento');
@@ -157,12 +153,14 @@ class SeguimientoController extends Controller
     }
     public function update_derivar(SeguimientoFormRequest $request, $id)
     {
+        $now = Carbon::now();
         $seguimiento = Seguimiento::find($id);
         $seguimiento->observaciones = request('observaciones');
         $seguimiento->usuario_destino = request('id_users');
         $id_rol = User::where('id_users', request('id_users'))->firstOrFail()->id_rol;
         $seguimiento->area_destino = $this->area_destino($id_rol);
         $seguimiento->completado = true;
+        $seguimiento->fecha_fin = $now;
         $seguimiento->save();
         if ($seguimiento->save()) {
             $recipient = User::find($request->id_users);

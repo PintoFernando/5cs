@@ -31,7 +31,7 @@
           <td>{{$cre->ci}}</td>
           <td>{{$cre->monto_solicitado}}</td>
           <td> <a href="{{url('/plataforma/seleccionar_credito/'.$cre->id_persona.'/'.$cre->id_credito.'/seleccionar_credito')}}" rel="tooltip" title="Seleccionar crédito" class="btn btn-success btn-simple btn-xs">
-                        <i class="fa fa-gear"></i> 
+          <i class="fa fa-check " aria-hidden="true"></i>
                         </a></td>
         </tr>
         @endforeach

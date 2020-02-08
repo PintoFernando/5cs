@@ -29,7 +29,7 @@
           <td>{{$pe->ci}}</td>
           <td>{{$pe->num_socio}}</td>
           <td> <a href="{{url('/jefecredito/seleccionar/'.$pe->id_persona.'/seleccionar')}}" rel="tooltip" title="Seleccionar persona" class="btn btn-success btn-simple btn-xs">
-                        <i class="fa fa-gear"></i> 
+          <i class="fa fa-check " aria-hidden="true"></i>
                         </a></td>
         </tr>
         @endforeach

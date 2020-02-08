@@ -38,7 +38,7 @@ class SeguimientoController extends Controller
             alert()->info('Info', 'Seleccione un crédito')->showConfirmButton();
             return redirect('riesgos/dashboard/');
         } else {
-            $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->get();
+            $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
             $existe_registros = Seguimiento::where('id_credito', Session::get('id_credito'))->exists();
             //---
             if ($existe_registros) //si no existe registros
@@ -82,9 +82,9 @@ class SeguimientoController extends Controller
             return redirect('/riesgos/seguimiento/');
         }
     }
-    public function edit_fin($id)
+    /*public function edit_fin($id)
     {
-        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->get();
+        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
         $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
 
         if ($seguimiento->last()->completado == true) {
@@ -123,12 +123,10 @@ class SeguimientoController extends Controller
             alert()->info('Info', 'Exelente')->showConfirmButton();
             return redirect('/riesgos/seguimiento');
         }
-    }
-
+    }*/
     public function edit_derivar($id)
     {
-
-        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->get();
+        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
         $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
         if ($seguimiento->last()->completado == true) {
             alert()->info('Info', 'Ya está completado')->showConfirmButton();
@@ -157,7 +155,6 @@ class SeguimientoController extends Controller
             }
 
         }
-
     }
     public function update_derivar(SeguimientoFormRequest $request, $id)
     {
@@ -167,6 +164,7 @@ class SeguimientoController extends Controller
         $id_rol=User::where('id_users',request('id_users'))->firstOrFail()->id_rol;
         $seguimiento->area_destino = $this->area_destino($id_rol);
         $seguimiento->completado= true;
+        $seguimiento->fecha_fin=Carbon::now();
         $seguimiento->save();
         if($seguimiento->save())
         {

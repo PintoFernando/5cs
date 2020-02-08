@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="box">
   <div class="box-header">
-     <h4>Lista de Créditos   
+     <h4>Lista de Créditos
   </h4>
   </div>
   <!-- /.box-header -->
@@ -33,15 +33,13 @@
           <td>{{$cre->monto_solicitado}}</td>
           <td>{{$cre->tipo_credito}}</td>
           <td> <a href="{{url('/asesoria/seleccionar_credito/'.$cre->id_persona.'/'.$cre->id_credito.'/seleccionar_credito')}}" rel="tooltip" title="Seleccionar crédito" class="btn btn-success btn-simple btn-xs">
-                        <i class="fa fa-thumbs-up "></i> 
-                        </a></td>
+          <i class="fa fa-check " aria-hidden="true"></i>
+         </a></td>
         </tr>
         @endforeach
-      </tbody>                
+      </tbody>
     </table>
  </div>
  <!-- /.box-body -->
 </div>
 @endsection
-
-
