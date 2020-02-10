@@ -35,10 +35,10 @@
     <thead>
       <tr>      
        <th>Id</th>
-       <th>Fecha inicio</th>
-       <th>Fecha fin</th>
-       <th>Usuario destino</th> 
-       <th>Área destino</th>    
+       <th>Fecha Inicio Atención</th>
+       <th>Fecha Fin de Atención</th>
+       <th>Usuario Destino</th> 
+       <th>Área Destino</th>    
        <th>Observaciones</th>          
        <th>Desembolsado</th>
        <th>Área</th>             
@@ -79,7 +79,7 @@
      <td>{{$se->name}}</td>
 
       <td> 
-       <a href="{{url('/asesoria/seguimiento/'.$se->id_seguimiento.'/edit_fin')}}"> <button type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-saved"></span>Marcar fin</button> </a> 
+      <!--<a href="{{url('/asesoria/seguimiento/'.$se->id_seguimiento.'/edit_fin')}}"> <button type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-saved"></span>Marcar fin</button> </a> -->
       <a href="{{url('/asesoria/seguimiento/'.$se->id_seguimiento.'/edit_derivar')}}"><button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-user"></span>Derivar </button> </a> 
       </td>    
 

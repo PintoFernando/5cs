@@ -32,16 +32,16 @@
   <table id="o_seguimiento" class="table table-bordered table-striped">
     <thead>
       <tr>      
-       <th>ID</th>
-       <th>FECHA INICIO</th>
-       <th>FECHA FIN</th>
-       <th>USUARIO DESTINO</th> 
-       <th>ÁREA DESTINO</th>    
-       <th>OBSERVACIONES</th>          
-       <th>DESENBOLSADO</th>
-       <th>ÁREA</th>             
-       <th>USUARIO</th> 
-       <th>ACCIONES</th>            
+       <th>Id</th>
+       <th>Fecha Inicio Atención</th>
+       <th>Fecha Fin de Atención</th>
+       <th>Usuario Destino</th> 
+       <th>Área Destino</th>    
+       <th>Observaciones</th>          
+       <th>Desembolsado</th>
+       <th>Área</th>             
+       <th>Usuario</th> 
+       <th>Acciones</th>            
      </tr>
    </thead>
    <tbody>

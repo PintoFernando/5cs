@@ -33,8 +33,8 @@
     <thead>
       <tr>      
        <th>Id</th>
-       <th>Fecha inicio</th>
-       <th>Fecha fin</th>
+       <th>Fecha Inicio Atención</th>
+       <th>Fecha Fin Atención</th>
        <th>Usuario destino</th> 
        <th>Área destino</th>    
        <th>Observaciones</th>          

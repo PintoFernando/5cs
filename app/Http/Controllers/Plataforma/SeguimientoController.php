@@ -129,7 +129,7 @@ class SeguimientoController extends Controller
             if ($seguimiento->last()->id_users == Auth::user()->id_users) {
                 if ($seguimiento->last()->id_seguimiento == $id) {
                     if (empty($seguimiento->last()->usuario_destino)) {
-                        $usuarios_sis = User::All();
+                        $usuarios_sis = User::where('id_users','!=',auth()->id())->where('id_users','!=',15)->get();
                         $area_destino = Area::All();
                         $seguimiento = Seguimiento::find($id);
                         return view('plataforma.seguimiento.derivar')->with(compact('segui', 'usuarios_sis', 'area_destino'));

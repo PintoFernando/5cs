@@ -1,5 +1,6 @@
 <?php
 namespace sis5cs\Http\Controllers\Asesoria;
+
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -11,6 +12,7 @@ use sis5cs\Http\Requests\SeguimientoFormRequest;
 use sis5cs\Notifications\DerivadoSent;
 use sis5cs\Seguimiento;
 use sis5cs\User;
+
 class SeguimientoController extends Controller
 {
     public function __construct()
@@ -36,7 +38,7 @@ class SeguimientoController extends Controller
             alert()->info('Info', 'Seleccione un crédito')->showConfirmButton();
             return redirect('asesoria/dashboard/');
         } else {
-            $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
+            $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento', 'ASC')->get();
             $existe_registros = Seguimiento::where('id_credito', Session::get('id_credito'))->exists();
             //---
             if ($existe_registros) //SI EXISTE
@@ -79,51 +81,51 @@ class SeguimientoController extends Controller
             return redirect('/asesoria/seguimiento/');
         }
     }
-    public function edit_fin($id)
+    /*  public function edit_fin($id)
     {
-        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento', 'ASC')->get();
-        $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
-    
-        if ($seguimiento->last()->completado ==true) {
-            alert()->info('Info', 'Ya está completado')->showConfirmButton();
-            return redirect('asesoria/seguimiento');
-        } else {
-            if ($seguimiento->last()->id_users == Auth::user()->id_users) {
-                if ($seguimiento->last()->id_seguimiento == $id) {
-                    if (empty($seguimiento->last()->fecha_fin)) {
-                        return view('asesoria.seguimiento.fin')->with(compact('segui'));
-                    } else {
-                        alert()->info('Info', 'Ya Marco Fin')->showConfirmButton();
-                        return redirect('asesoria/seguimiento');
-                    }
-                } else {
-                    alert()->info('Info', 'Ya está completado')->showConfirmButton();
-                    return redirect('asesoria/seguimiento');
-                }
+    $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento', 'ASC')->get();
+    $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
 
-            } else {
-                alert()->info('Info', 'No corresponde')->showConfirmButton();
-                return redirect('asesoria/seguimiento');
-            }
+    if ($seguimiento->last()->completado ==true) {
+    alert()->info('Info', 'Ya está completado')->showConfirmButton();
+    return redirect('asesoria/seguimiento');
+    } else {
+    if ($seguimiento->last()->id_users == Auth::user()->id_users) {
+    if ($seguimiento->last()->id_seguimiento == $id) {
+    if (empty($seguimiento->last()->fecha_fin)) {
+    return view('asesoria.seguimiento.fin')->with(compact('segui'));
+    } else {
+    alert()->info('Info', 'Ya Marco Fin')->showConfirmButton();
+    return redirect('asesoria/seguimiento');
+    }
+    } else {
+    alert()->info('Info', 'Ya está completado')->showConfirmButton();
+    return redirect('asesoria/seguimiento');
+    }
 
-        }
+    } else {
+    alert()->info('Info', 'No corresponde')->showConfirmButton();
+    return redirect('asesoria/seguimiento');
+    }
+
+    }
     }
     public function update_fin(SeguimientoFormRequest $request, $id)
     {
-        $now = Carbon::now();
-        $seguimiento = Seguimiento::find($id);
-        if ($request->input('fin') == 1) {
-            $seguimiento->fecha_fin = $now;
-            $seguimiento->save();
-            alert()->info('Info', 'Exelente')->showConfirmButton();
-            return redirect('/asesoria/seguimiento');
-        }
+    $now = Carbon::now();
+    $seguimiento = Seguimiento::find($id);
+    if ($request->input('fin') == 1) {
+    $seguimiento->fecha_fin = $now;
+    $seguimiento->save();
+    alert()->info('Info', 'Exelente')->showConfirmButton();
+    return redirect('/asesoria/seguimiento');
     }
+    }*/
 
     public function edit_derivar($id)
     {
 
-        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento','ASC')->get();
+        $seguimiento = Seguimiento::where('id_credito', Session::get('id_credito'))->orderBy('id_seguimiento', 'ASC')->get();
         $segui = Seguimiento::find($id); //para mandar el id_seguimiento a la vista
         if ($seguimiento->last()->completado == true) {
             alert()->info('Info', 'Ya está completado')->showConfirmButton();
@@ -132,7 +134,7 @@ class SeguimientoController extends Controller
             if ($seguimiento->last()->id_users == Auth::user()->id_users) {
                 if ($seguimiento->last()->id_seguimiento == $id) {
                     if (empty($seguimiento->last()->usuario_destino)) {
-                        $usuarios_sis = User::All();
+                        $usuarios_sis = User::where('id_users','!=',auth()->id())->where('id_users','!=',15)->get();
                         $area_destino = Area::All();
                         $seguimiento = Seguimiento::find($id);
                         return view('asesoria.seguimiento.derivar')->with(compact('segui', 'usuarios_sis', 'area_destino'));
@@ -161,6 +163,7 @@ class SeguimientoController extends Controller
         $id_rol = User::where('id_users', request('id_users'))->firstOrFail()->id_rol;
         $seguimiento->area_destino = $this->area_destino($id_rol);
         $seguimiento->completado = true;
+        $seguimiento->fecha_fin=Carbon::now();
         $seguimiento->save();
         if ($seguimiento->save()) {
             $recipient = User::find($request->id_users);

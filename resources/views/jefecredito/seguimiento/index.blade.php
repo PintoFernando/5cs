@@ -33,10 +33,10 @@
     <thead>
       <tr>      
        <th>Id</th>
-       <th>Fecha inicio</th>
-       <th>Fecha fin</th>
-       <th>Usuario destino</th> 
-       <th>Área destino</th>    
+       <th>Fecha inicio Atención</th>
+       <th>Fecha Fin de Atención</th>
+       <th>Usuario Destino</th> 
+       <th>Área Destino</th>    
        <th>Observaciones</th>          
        <th>Desembolsado</th>
        <th>Área</th>             
