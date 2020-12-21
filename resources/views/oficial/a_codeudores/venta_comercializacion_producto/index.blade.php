@@ -42,6 +42,12 @@
 </h4>
 </div>
 
+@if(session('notification'))
+<div class="alert alert-success">
+ {{session('notification')}}
+</div>
+@endif
+
 <!-- /.box-header -->
 <div class="box-body">
   <table id="o_venta_comercializacion" class="table table-bordered table-striped">
@@ -74,9 +80,14 @@
       <td>{{$ve->v_precio_total}}</td> 
       <td>{{$ve->utilidad}}</td> 
       <td>{{$ve->porcentaje}}</td>
-     <td> <a href="" data-target="#modal-delete-{{$ve->id_venta_comercializacion}}" rel="tooltip" title="Eliminar" data-toggle="modal" class="btn btn-danger btn-simple btn-xs">
+     <td> 
+     <a href="{{url('/oficial/a_codeudores/venta_comercializacion_producto/'.$ve->id_venta_comercializacion.'/edit')}}" rel="tooltip" title="Editar Venta Comercializacion" class="btn btn-success btn-simple btn-xs">
+        <i class="fa fa-edit"></i> 
+      </a>
+
+     <a href="" data-target="#modal-delete-{{$ve->id_venta_comercializacion}}" rel="tooltip" title="Eliminar" data-toggle="modal" class="btn btn-danger btn-simple btn-xs">
                          <i class="fa fa-times"></i> 
-                    </a>
+                    </a>               
     </td>
   </tr>
   @include('oficial.venta_comercializacion_producto.modal')

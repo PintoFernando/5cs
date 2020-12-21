@@ -186,6 +186,22 @@
 
 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
  <div class="form-group">
+   <label>Origen de Fondos</label>
+   <select name="id_origen" class="form-control selectpicker" data-size="5" id="id_origen" data-live-search="true">
+     @foreach ($origen_fondo as $origen)
+     @if($origen->id_origen==$cre->id_origen)
+     <option value="{{$origen->id_origen}}" selected>{{$origen->nombre}}</option>
+     @else
+     <option value="{{$origen->id_origen}}">{{$origen->nombre}}</option>
+     @endif
+     @endforeach
+     </select> 
+ </div>
+</div>
+
+
+<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+ <div class="form-group">
    <button class="btn btn-primary" type="submit">Guardar</button>
    <a href="{{url('/oficial/credito')}}" class="btn btn-default"> cancelar</a>
    <button class="btn btn-danger" type="reset">Restablecer</button>

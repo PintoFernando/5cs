@@ -37,7 +37,8 @@
       <th class="table-celda-naranja">Interés Nominal</th>
       <th class="table-celda-naranja">Tipo de Amortización</th>
       <th class="table-celda-naranja">Plazo en Meses</th>
-      <th colspan="2" class="table-celda-naranja">Destino del Crédito</th>
+      <th class="table-celda-naranja">Destino del Crédito</th>
+      <th class="table-celda-naranja">Origen de Recursos</th>
     </tr>
   </thead>
   <tbody>
@@ -45,7 +46,8 @@
       <td class="table-celda-centrada" >{{$cre->interes_nominal*100}}%</td>
       <td class="table-celda-centrada" >{{$cre->amortizacion}}</td>   
       <td class="table-celda-centrada" >{{$cre->plazo_meses}}</td>   
-      <td class="table-celda-centrada" colspan="2">{{$cre->destino_credito}}</td>   
+      <td class="table-celda-centrada" >{{$cre->destino_credito}}</td>   
+      <td class="table-celda-centrada" >{{$cre->nombre}}</td>   
     </tr>
     @endforeach
   </tbody>   
@@ -111,7 +113,7 @@
       <th class="table-celda-naranja">Edad</th>
       <th class="table-celda-naranja">Nacionalidad</th>
       <th class="table-celda-naranja">Departamento De Nacimiento</th>
-      <th class="table-celda-naranja">Ciudad de Nacimiento</th>
+      <th class="table-celda-naranja">Lugar de Nacimiento</th>
       <th class="table-celda-naranja" colspan="2">Provincia de Nacimiento</th>
     </tr>
   </thead>
@@ -125,22 +127,22 @@
     </tr>
 
     <tr>
-     <th class="table-celda-naranja">Provincia Nacimiento</th>
+     <!--<th class="table-celda-naranja">Provincia Nacimiento</th>-->
      <th class="table-celda-naranja">Estado  Civil</th>
      <th class="table-celda-naranja">Género</th>
      <th class="table-celda-naranja">Telefono/Celular</th>
      <th class="table-celda-naranja">Dependientes del Ingreso</th>
-     <th class="table-celda-naranja">Profesión</th>
+     <th class="table-celda-naranja" colspan="2">Profesión</th>
    </tr>
 
 
    <tr>
-     <td class="table-celda-centrada">{{$per->provincia_nac}}</td>
+     <!--<td class="table-celda-centrada">{{$per->provincia_nac}}</td>-->
      <td class="table-celda-centrada">{{$per->estado_civil}}</td>   
      <td class="table-celda-centrada">{{$per->genero}}</td>   
      <td class="table-celda-centrada">{{$per->celular}}</td>
      <td class="table-celda-centrada">{{$per->dependientes}}</td>
-     <td class="table-celda-centrada">{{$per->profesion}}</td>  
+     <td class="table-celda-centrada" colspan="2">{{$per->profesion}}</td>  
    </tr>
 
    @endforeach
@@ -817,7 +819,7 @@ $act_eco_cont++;
  @endforeach
 </tbody>                
 <td colspan="3"><b>TOTAL CUENTAS POR PAGAR:</b></td>
-<td class="table-celda-derecha"><b>{{number_format($total_cuentas_por_pagar,2,',', '.')}}</b></td>          
+<td class="table-celda-derecha"><b>{{number_format($total_cuentas_por_pagar_saldo,2,',', '.')}}</b></td>          
 </table>
 @endif
 

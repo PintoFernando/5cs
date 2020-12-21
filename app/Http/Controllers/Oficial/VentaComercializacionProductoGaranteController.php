@@ -77,7 +77,7 @@ class VentaComercializacionProductoGaranteController extends Controller
 
     public function edit($id)
     {
-        if (Session::get('id_persona__garante') == null) {
+        if (Session::get('id_persona_garante') == null) {
             alert()->info('Info', 'Seleccione un garante')->showConfirmButton();
             return redirect('oficial/garante/');
         } else {
@@ -86,22 +86,33 @@ class VentaComercializacionProductoGaranteController extends Controller
         }
     }
 
-    public function update(VentaComercializacionProductoFormRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'producto' => 'string|required',
+            'cantidad' => 'numeric|required',
+            'unidad_medida' => 'string|required',
+            'c_costo_unitario' => 'numeric|required',
+            'c_costo_total' => 'numeric|required',
+            'v_precio_unitario' => 'numeric|required',
+            'v_precio_total' => 'numeric|required',
+            'utilidad' => 'numeric|required',
+            'porcentaje' => 'numeric|required',
+        ]);
         $ven = VentaComercializacionProducto::find($id);
         $ven->producto = $request->input('producto');
         $ven->cantidad = $request->input('cantidad');
         $ven->unidad_medida = $request->input('unidad_medida');
-        $ven->v_costo_unitario = $request->input('v_costo_unitario');
-        $ven->v_costo_total = $request->input('v_costo_total');
-        $ven->c_precio_unitario = $request->input('c_precio_unitario');
-        $ven->c_precio_total = $request->input('c_precio_total');
+        $ven->c_costo_unitario = $request->input('c_costo_unitario');
+        $ven->c_costo_total = $request->input('c_costo_total');
+        $ven->v_precio_unitario = $request->input('v_precio_unitario');
+        $ven->v_precio_total = $request->input('v_precio_total');
         $ven->utilidad = $request->input('utilidad');
         $ven->porcentaje = $request->input('porcentaje');
-        $ven->detalle = $request->input('detalle');
-        $ven->id_persona = $this->id_persona_garante;
+        $ven->id_persona = Session::get('id_persona_garante');
         $ven->save(); //metodo se encarga de ejecutar un insert sobre la tabla
-        return redirect('/oficial/a_garantes/venta_comercializacion_producto/');
+        $notification = 'Exelente sus datos  se modificaron correctamente';
+        return redirect('oficial/a_garantes/venta_comercializacion_producto/')->with(compact('notification'));
     }
 
     public function destroy($id)

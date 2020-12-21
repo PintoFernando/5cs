@@ -60,7 +60,6 @@ class PersonaController extends Controller
         $persona->id_estado_civil = $request->input('id_estado_civil');
         $persona->id_nacionalidad = $request->input('id_nacionalidad');
         $persona->save(); //metodo se encarga de ejecutar un insert sobre la tabla
-
         $notification = 'Exelente sus datos  se añadieron correctamente';
         return redirect('oficial/persona')->with(compact('notification'));
     }

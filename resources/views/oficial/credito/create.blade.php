@@ -66,6 +66,7 @@
    <div class="form-group">
      <label for="plazo_meses">Día pago</label>
      <select name="dia_pago"  class="form-control selectpicker" data-size="5" id="dia_pago" data-live-search="true">                  
+     <option value="">Seleccione una opción</option>
        <option value="1">1</option>                    
        <option value="2">2</option>                    
        <option value="3">3</option>                    
@@ -105,8 +106,8 @@
    <div class="form-group" class="form-control">
      <label for="id_tipo_moneda">Tipo de Moneda</label>
      <select name="id_tipo_moneda"  class="form-control selectpicker" data-size="5" id="id_tipo_moneda" data-live-search="true" required>
+     <option value="">Seleccione una opción</option>
        @foreach($tipo as $ti)
-
        <option value="{{$ti->id_tipo_moneda}}"> {{$ti->tipo_moneda}}</option>
        @endforeach
    </select>
@@ -117,6 +118,7 @@
    <div class="form-group" class="form-control">
      <label for="id_periodo_pago">Periodo de Pago</label>
      <select name="id_periodo_pago"  class="form-control selectpicker" data-size="5" id="id_periodo_pago" data-live-search="true" required>
+     <option value="">Seleccione una opción</option>
        @foreach($tipo_p as $ti)
 
        <option value="{{$ti->id_periodo_pago}}"> {{$ti->periodo_pago}}</option>
@@ -129,6 +131,7 @@
    <div class="form-group" class="form-control">
      <label for="id_tamortizacion">Tipo de Amortización</label>
      <select name="id_tamortizacion"  class="form-control selectpicker" data-size="5" id="id_tamortizacion" data-live-search="true" required>
+     <option value="">Seleccione una opción</option>
        @foreach($tipo_a as $ti)
 
        <option value="{{$ti->id_tamortizacion}}"> {{$ti->amortizacion}}</option>
@@ -141,6 +144,7 @@
    <div class="form-group" class="form-control">
      <label for="id_tcredito">Tipo de Crédito</label>
      <select name="id_tcredito"  class="form-control selectpicker" data-size="5" id="id_tcredito" data-live-search="true" required>
+     <option value="">Seleccione una opción</option>
        @foreach($tipo_credito as $ti)
 
        <option value="{{$ti->id_tcredito}}"> {{$ti->tipo_credito}}</option>
@@ -153,6 +157,7 @@
    <div class="form-group" class="form-control">
      <label for="id_destino_credito">Destino de Crédito</label>
      <select name="id_destino_credito"  class="form-control selectpicker" data-size="5" id="id_destino_credito" data-live-search="true" required>
+     <option value="">Seleccione una opción</option> 
        @foreach($destino as $de)
 
        <option value="{{$de->id_destino_credito}}"> {{$de->destino_credito}}</option>
@@ -165,6 +170,7 @@
    <div class="form-group" class="form-control">
      <label for="id_forma_pago">Forma Pago</label>
      <select name="id_forma_pago"  class="form-control selectpicker" data-size="5" id="id_forma_pago" data-live-search="true" required>
+     <option value="">Seleccione una opción</option>
        @foreach($forma as $fo)
 
        <option value="{{$fo->id_forma_pago}}"> {{$fo->forma_pago}}</option>
@@ -174,7 +180,20 @@
 </div>
 
 
-  <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+   <div class="form-group" class="form-control">
+     <label for="id_origen">Origen de fondos</label>
+     <select name="id_origen"  class="form-control selectpicker" data-size="5" id="id_origen" data-live-search="true" required>
+     <option value="">Seleccione una opción</option>
+       @foreach($origen_fondo as $origen)
+       <option value="{{$origen->id_origen}}"> {{$origen->nombre}}</option>
+       @endforeach
+   </select>
+</div>
+</div>
+
+
+  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
     <div class="form-group">
      <button class="btn btn-primary" type="submit">Guardar</button>
      <a href="{{url('/oficial/credito')}}" class="btn btn-danger"> cancelar</a>

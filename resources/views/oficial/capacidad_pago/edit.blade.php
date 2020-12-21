@@ -52,13 +52,18 @@
          @if($capacidad->porcentaje==0.25)
          <option value="{{$capacidad->porcentaje}}" selected>25%</option>
          <option value="0.4" >40%</option>
+         <option value="0.5" >50%</option>
          @else
-         <option value="{{$capacidad->porcentaje}}" selected>40%</option>
-         <option value="0.25" >25%</option>
-         @endif
-         
-
-
+            @if($capacidad->porcentaje==0.50)
+            <option value="{{$capacidad->porcentaje}}" selected>50%</option>
+            <option value="0.25" >25%</option>
+            <option value="0.4" >40%</option>
+            @else
+            <option value="{{$capacidad->porcentaje}}" selected>40%</option>
+            <option value="0.25" >25%</option>
+            <option value="0.5" >50%</option>
+         @endif 
+         @endif 
        </select> 
      </div>
    </div>

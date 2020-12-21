@@ -36,7 +36,7 @@
     @endif
   </div>
 </div>
-<div class="row">      
+<div class="row">  
   <form method="post" action="{{url('/oficial/vehiculo/'.$vehiculo->id_vehiculo.'/edit')}}">
     {{csrf_field()}}
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

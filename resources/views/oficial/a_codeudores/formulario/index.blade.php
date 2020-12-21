@@ -10,50 +10,6 @@
   </div></center>
 </div>
 
-@if ($if_exist_credito>0)
-<table  style="width:100%"  border="2" style="margin:auto;">
-  <thead>
-    <tr>
-      <th width="80" colspan="6" class="table-celda-verde"><h7><strong>SOLICITUD DE CRÉDITO</strong></h7></th>
-    </tr>
-    <tr>
-      <th class="table-celda-naranja">Fecha de Solicitud</th>
-      <th class="table-celda-naranja">Tipo de Crédito</th>
-      <th class="table-celda-naranja">Monto Solicitado</th>
-      <th class="table-celda-naranja">Tipo de Moneda</th>
-      <th class="table-celda-naranja">Periodo de Pago</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($credito as $cre)
-    <tr>
-      <td class="table-celda-centrada">{{$cre->fecha_solicitud}}</td>
-      <td  class="table-celda-centrada">{{$cre->tipo_credito}}</td>
-      <td  class="table-celda-centrada">{{$cre->monto_solicitado}}</td>
-      <td  class="table-celda-centrada">{{$cre->tipo_moneda}}</td>
-      <td  class="table-celda-centrada">{{$cre->periodo_pago}}</td>
-    </tr>
-  </tbody>
-  <thead>
-    <tr>
-      <th class="table-celda-naranja">Interés Nominal</th>
-      <th class="table-celda-naranja">Tipo de Amortización</th>
-      <th class="table-celda-naranja">Plazo en Meses</th>
-      <th colspan="2" class="table-celda-naranja">Destino del Crédito</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="table-celda-centrada" >{{$cre->interes_nominal*100}}%</td>
-      <td class="table-celda-centrada" >{{$cre->amortizacion}}</td>
-      <td class="table-celda-centrada" >{{$cre->plazo_meses}}</td>
-      <td class="table-celda-centrada" colspan="2">{{$cre->destino_credito}}</td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
-@endif
-
 
 @if($if_exist_garantias>0)
 
@@ -114,7 +70,7 @@ $cont = 1;
       <th class="table-celda-naranja">Edad</th>
       <th class="table-celda-naranja">Nacionalidad</th>
       <th class="table-celda-naranja">Departamento De Nacimiento</th>
-      <th class="table-celda-naranja">Ciudad de Nacimiento</th>
+      <th class="table-celda-naranja">Lugar de Nacimiento</th>
       <th class="table-celda-naranja" colspan="2">Provincia de Nacimiento</th>
     </tr>
   </thead>

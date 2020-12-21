@@ -65,6 +65,10 @@ class ScorSocioController extends Controller
             alert()->info('Info', 'Seleccione un socio')->showConfirmButton();
             return redirect('oficial/dashboard/');
         }
+        if (Session::get('id_credito') == null) {
+            alert()->info('Info', 'Seleccione un Crédito')->showConfirmButton();
+            return redirect('oficial/dashboard/');
+        }
         $id = Session::get('id_persona');
         //tablas requeridas en el scoring
         $exi_credito = Credito::where('id_persona', $id)->get()->isEmpty();
@@ -99,7 +103,7 @@ class ScorSocioController extends Controller
 
         $persona = Persona::find($id);
         //tabla credito
-        $credito = Credito::where('id_persona', $id)->firstOrFail();
+        $credito = Credito::where('id_credito', Session::get('id_credito'))->firstOrFail();
         $capacidad_pago12 = CapacidadPago::where('id_persona', $id)->firstOrFail();
         $tipo_credito = TipoCredito::where('id_tcredito', $credito->id_tcredito)->firstOrFail()->tipo_credito;
         $edad = Carbon::parse($persona->fec_nac)->age; //1990-10-25
@@ -153,9 +157,8 @@ class ScorSocioController extends Controller
                 return redirect('oficial/dashboard/');
             }
         }
-
         $endeudamiento_actual = $this->endeudamientoActual($id); //con la funcion para controlar division entre cero
-        $monto_solicitado = Credito::where('id_persona', $id)->firstOrFail()->monto_solicitado;
+        $monto_solicitado = Credito::where('id_credito', Session::get('id_credito'))->firstOrFail()->monto_solicitado;
         $endeudamiento_con_este_credito = $this->endeudamientoConEsteCredito($id);
         $pendeudamiento_actual = PuntajeRepository::f_endeudamiento_actual($endeudamiento_actual);
         $pendeudamiento_con_este_credito = PuntajeRepository::f_endeudamiento_con_credito($endeudamiento_con_este_credito);
@@ -485,7 +488,7 @@ class ScorSocioController extends Controller
         if ($this->total_activos($id) == 0) {
             return 0;
         } else {
-            $monto_solicitado = Credito::where('id_persona', $id)->firstOrFail()->monto_solicitado;
+            $monto_solicitado = Credito::where('id_credito', Session::get('id_credito'))->firstOrFail()->monto_solicitado;
             $tipo_moneda = Credito::where('id_persona', $id)->firstOrFail()->id_tipo_moneda;
             if ($tipo_moneda == 2) {
                 $icredito = Credito::where('id_persona', $id)->firstOrFail()->id_credito;

@@ -2,6 +2,8 @@
 namespace sis5cs\Repositories\Riesgos;
 use DB;
 use sis5cs\CapacidadPago;
+use sis5cs\Seguimiento;
+use Carbon\Carbon;
 class InformeRiesgosRepository
 {
     public static function credito($id_credito)
@@ -30,6 +32,26 @@ class InformeRiesgosRepository
             ->where('persona.id_persona', $id_persona)
             ->get();
         return $persona;       
+    }
+    public static function seguimiento($id_credito)
+    {
+        if(Seguimiento::where('id_credito', $id_credito)->exists()){
+            return Carbon::parse(Seguimiento::where('id_credito', $id_credito)->orderBy('id_seguimiento','ASC')->get()->last()->created_at)->format('d-m-Y');            
+        }else{
+            return " ";
+        }
+
+    }
+    
+    public function capacidadPago($id)
+    {
+        $capacidad = CapacidadPago::where('id_persona', $id)->exists();
+        if ($capacidad) {
+            $porcentaje = CapacidadPago::where('id_persona', $id)->firstOrFail()->porcentaje;
+            return $porcentaje*100;
+        } else {
+            return null;
+        }
     }
 
     public static function cuota_mensual($id_persona)
@@ -81,6 +103,22 @@ class InformeRiesgosRepository
         return $patrimonio;
     }
 
-  
+  /*-----------------------------------------Total prestamos-----------------------------------------------*/
+  public  function obligaciones_mensuales($id)
+  {
+    $total_prestamos = DB::table('prestamo_bancario')->where('id_persona', $id)->sum('importe_ultimo_pago');
+    $tiene_capacidad = $this->amortizacionSanMartin($id) + $total_prestamos;
+    return  $tiene_capacidad;
+  }
+  public function amortizacionSanMartin($id)
+  {
+      $capacidad = CapacidadPago::where('id_persona', $id)->exists();
+      if ($capacidad) {
+          $amortizacion_coop_san_martin = CapacidadPago::where('id_persona', $id)->firstOrFail()->amortizacion_coop_san_martin;
+          return $amortizacion_coop_san_martin;
+      } else {
+          return 0;
+      }
+  }
 
 }

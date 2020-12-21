@@ -15,6 +15,7 @@ use sis5cs\TipoAmortizacion;
 use sis5cs\FormaPago;
 use sis5cs\Requisitos;
 use sis5cs\User;
+use sis5cs\OrigenFondo;
 use sis5cs\Http\Requests\CreditoFormRequest;
 use DB;
 use Fpdf;
@@ -42,7 +43,8 @@ class CreditoController extends Controller
       ->join('tipo_amortizacion', 'credito.id_tamortizacion', '=', 'tipo_amortizacion.id_tamortizacion')
       ->join('tipo_credito', 'credito.id_tcredito', '=', 'tipo_credito.id_tcredito')
       ->join('destino_credito', 'credito.id_destino_credito', '=', 'destino_credito.id_destino_credito')
-      ->select('credito.*', 'tipo_moneda.tipo_moneda', 'destino_credito.destino_credito', 'tipo_credito.tipo_credito', 'tipo_periodo_pago.periodo_pago', 'tipo_amortizacion.amortizacion')
+      ->leftJoin('origen_fondo', 'credito.id_origen', '=', 'origen_fondo.id_origen')
+      ->select('credito.*', 'tipo_moneda.tipo_moneda', 'destino_credito.destino_credito', 'tipo_credito.tipo_credito', 'tipo_periodo_pago.periodo_pago', 'tipo_amortizacion.amortizacion','origen_fondo.nombre')
       ->where('id_persona', $this->id_persona)
       ->get();
       return view('oficial.credito.index')->with(compact('creditos'));
@@ -67,8 +69,9 @@ class CreditoController extends Controller
         $tipo_a = TipoAmortizacion::all();
         $destino = DestinoCredito::all();
         $forma = FormaPago::all();
+        $origen_fondo = OrigenFondo::all();
         return view('oficial.credito.create')
-        ->with(compact('entidad', 'tipo', 'tipo_p', 'tipo_credito', 'tipo_a', 'destino','forma'));
+        ->with(compact('entidad', 'tipo', 'tipo_p', 'tipo_credito', 'tipo_a', 'destino','forma','origen_fondo'));
       }
 
 
@@ -86,6 +89,7 @@ class CreditoController extends Controller
     $cre->plazo_meses = $request->input('plazo_meses');
     $cre->dia_pago = $request->input('dia_pago');
     $cre->id_tipo_moneda = $request->input('id_tipo_moneda');
+    $cre->id_origen = $request->input('id_origen');
     $cre->id_periodo_pago = $request->input('id_periodo_pago');
     $cre->id_tamortizacion = $request->input('id_tamortizacion');
     $cre->id_tcredito = $request->input('id_tcredito');
@@ -106,8 +110,10 @@ class CreditoController extends Controller
     $tipo_credito = TipoCredito::All();
     $destino_credito = DestinoCredito::All();
     $forma = FormaPago::All();
+    $origen_fondo = OrigenFondo::all();
     $cre = Credito::find($id);
-    return view('oficial.credito.edit')->with(compact('cre', 'periodo_pago', 'moneda', 'amortizacion', 'tipo_credito', 'destino_credito','forma')); //formulario de registro
+ 
+    return view('oficial.credito.edit')->with(compact('cre', 'periodo_pago', 'moneda', 'amortizacion', 'tipo_credito', 'destino_credito','forma','origen_fondo')); //formulario de registro
   }
   public function update(CreditoFormRequest $request, $id)
   {
@@ -125,6 +131,7 @@ class CreditoController extends Controller
     $cre->id_persona = $this->id_persona;
     $cre->id_destino_credito = $request->input('id_destino_credito');
     $cre->id_forma_pago = $request->input('id_forma_pago');
+    $cre->id_origen = $request->input('id_origen');
     $cre->save(); //metodo se encarga de ejecutar un insert sobre la tabla
     $notification= 'Exelente los datos se han modificado correctamente'; 
     return redirect('oficial/credito')->with(compact('notification'));

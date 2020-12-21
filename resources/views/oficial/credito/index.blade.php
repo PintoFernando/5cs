@@ -56,6 +56,7 @@
        <th>Tasa de Amortización</th>                              
        <th>Tipo de Crédito</th>                              
        <th>Destino del Crédito</th>                              
+       <th>Origen de fondos</th>                              
        <th>Acción</th>                              
      </tr>
    </thead>
@@ -73,6 +74,7 @@
       <td>{{$cre->amortizacion}}</td>
       <td>{{$cre->tipo_credito}}</td>
       <td>{{$cre->destino_credito}}</td>
+      <td>{{$cre->nombre}}</td>
       
       <td> <a href="{{url('/oficial/credito/'.$cre->id_credito.'/edit')}}" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-xs">
         <i class="fa fa-pencil"></i> 

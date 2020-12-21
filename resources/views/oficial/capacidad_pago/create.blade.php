@@ -66,6 +66,7 @@
        <select name="porcentaje"  class="form-control selectpicker" data-size="5" id="porcentaje" data-live-search="true">         
          <option value="0.25"> 25%</option>
          <option value="0.4"> 40%</option>
+         <option value="0.5"> 50%</option>
        </select>
      </div>
    </div>

@@ -29,6 +29,7 @@
      <div class="form-group" class="form-control">
        <label for="id_ext"> (*) Extensión de Ci</label>
        <select name="id_ext"  class="form-control selectpicker" data-size="5" id="id_ext" data-live-search="true" required>
+       <option value="">Seleccione una opción</option>
          @foreach($extensiones as $ex)
          <option value="{{$ex->id_ext}}"> {{$ex->extension}}</option>
          @endforeach
@@ -134,6 +135,7 @@
  <div class="form-group" class="form-control">
    <label for="id_profesion">(*) Profesion</label>
    <select name="id_profesion"  class="form-control selectpicker" data-size="5" id="id_profesion" data-live-search="true" required>
+   <option value="">Seleccione una opción</option>
      @foreach($profesiones as $pro)
      <option value="{{$pro->id_profesion}}"> {{$pro->profesion}}</option>
      @endforeach
@@ -146,6 +148,7 @@
  <div class="form-group" class="form-control">
    <label for="id_estado_civil">(*) Estado Civil</label>
    <select name="id_estado_civil"  class="form-control selectpicker" data-size="5" id="id_estado_civil" data-live-search="true" required>
+   <option value="">Seleccione una opción</option> 
      @foreach($estados as $esta)
      <option value="{{$esta->id_estado_civil}}"> {{$esta->estado_civil}}</option>
      @endforeach
@@ -158,7 +161,8 @@
  <div class="form-group" class="form-control">
    <label for="id_nacionalidad">(*) Nacionalidad</label>
    <select name="id_nacionalidad"  class="form-control selectpicker" data-size="5" id="id_nacionalidad" data-live-search="true" required>
-     @foreach($nacionalidades as $na)
+   <option value="">Seleccione una opción</option>
+     @foreach($nacionalidades as $na)  
      <option value="{{$na->id_nacionalidad}}"> {{$na->nacionalidad}}</option>
      @endforeach
    </select>

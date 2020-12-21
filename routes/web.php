@@ -840,7 +840,6 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/referencias_solicitante/{id}/edit', 'Oficial\ReferenciaSolicitanteController@update'); //actualizar
     Route::delete('/referencias_solicitante/{id}', 'Oficial\ReferenciaSolicitanteController@destroy'); //actualizar
 
-
     //Rutas Tipo Cambio
     Route::get('/tipo_cambio/', 'Oficial\TipoCambioController@index'); //listado
     Route::get('/tipo_cambio/create', 'Oficial\TipoCambioController@create'); //crear

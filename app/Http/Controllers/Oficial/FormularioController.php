@@ -34,6 +34,7 @@ use sis5cs\TipoCredito;
 use sis5cs\Vehiculo;
 use sis5cs\VentaComercializacionProducto;
 use sis5cs\Ventas;
+use sis5cs\OrigenFondo;
 
 class FormularioController extends Controller
 {
@@ -49,6 +50,10 @@ class FormularioController extends Controller
             alert()->info('Info', 'Seleccione un Socio')->showConfirmButton();
             return redirect('oficial/dashboard/');
         }
+        if (Session::get('id_credito') == null) {
+            alert()->info('Info', 'Seleccione un Crédito')->showConfirmButton();
+            return redirect('oficial/dashboard/');
+        }
         //$id_persona =Session::get('id_persona');
         $if_exist_credito = Credito::where('id_persona', Session::get('id_persona'))->count();
         $credito = DB::table('credito')
@@ -57,9 +62,10 @@ class FormularioController extends Controller
             ->join('tipo_amortizacion', 'credito.id_tamortizacion', '=', 'tipo_amortizacion.id_tamortizacion')
             ->join('tipo_credito', 'credito.id_tcredito', '=', 'tipo_credito.id_tcredito')
             ->join('destino_credito', 'credito.id_destino_credito', '=', 'destino_credito.id_destino_credito')
+            ->leftJoin('origen_fondo', 'credito.id_origen', '=', 'origen_fondo.id_origen')
             ->select('credito.*', 'tipo_moneda.tipo_moneda', 'tipo_periodo_pago.periodo_pago', 'tipo_amortizacion.amortizacion',
-                'tipo_credito.tipo_credito', 'destino_credito.destino_credito')
-            ->where('credito.id_persona', $this->id_persona)
+                'tipo_credito.tipo_credito', 'destino_credito.destino_credito','origen_fondo.nombre')
+                ->where('id_credito', Session::get('id_credito'))
             ->get();
         $if_exist_persona = Persona::where('id_persona', Session::get('id_persona'))->count();
         $personas = DB::table('persona')
@@ -259,7 +265,6 @@ class FormularioController extends Controller
             ->select('prestamo_bancario.*', 'entidad_bancaria.nombre_entidad', 'tipo_credito.tipo_credito')
             ->where('id_persona', Session::get('id_persona'))
             ->get();
-
         return view('oficial.formulario.index')
             ->with(compact('direccion'
                 , 'persona'
@@ -354,7 +359,7 @@ class FormularioController extends Controller
             ->with('total_mano_obra', round($total_mano_obra * 100) / 100)
             ->with('total_gastos_operativos', round($total_gastos_operativos[0]->sum * 100) / 100)
             ->with('utilidad_operativa', round($utilidad_operativa * 100) / 100)
-            ->with('tipo_credito', $this->tipoCredito(Session::get('id_persona')))
+            ->with('tipo_credito', $this->tipoCredito(Session::get('id_credito')))
             ->with('porcentaje_capacidad_pago', $this->capacidadPago(Session::get('id_persona')))
             ->with('calculo', round($calculo * 100) / 100)
             ->with('amortizacion_san_martin', $this->amortizacionSanMartin(Session::get('id_persona')))
@@ -373,7 +378,7 @@ class FormularioController extends Controller
         $creditos = DB::table('credito')
             ->join('tipo_credito', 'credito.id_tcredito', '=', 'tipo_credito.id_tcredito')
             ->select('credito.*', 'tipo_credito.tipo_credito')
-            ->where('id_persona', Session::get('id_persona'))
+            ->where('id_credito', $id)
             ->get();
 
         if (!$creditos->isEmpty()) {
