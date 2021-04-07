@@ -1,9 +1,13 @@
 <?php
+
 namespace sis5cs\Repositories\Riesgos;
+
 use DB;
 use sis5cs\CapacidadPago;
 use sis5cs\Seguimiento;
 use Carbon\Carbon;
+use sis5cs\Credito;
+
 class InformeRiesgosRepository
 {
     public static function credito($id_credito)
@@ -31,24 +35,40 @@ class InformeRiesgosRepository
             ->select('persona.*', 'nacionalidad.nacionalidad', 'profesion.profesion', 'estado_civil.estado_civil', 'actividad_economica.*', 'extension_ci.extension')
             ->where('persona.id_persona', $id_persona)
             ->get();
-        return $persona;       
+        return $persona;
     }
-    public static function seguimiento($id_credito)
-    {
-        if(Seguimiento::where('id_credito', $id_credito)->exists()){
-            return Carbon::parse(Seguimiento::where('id_credito', $id_credito)->orderBy('id_seguimiento','ASC')->get()->last()->created_at)->format('d-m-Y');            
-        }else{
-            return " ";
-        }
 
+    /* Funcion par encontrar la fecha inicio y fin del tramite del crédito */
+    public static function seguimientoGetFecha($option,$id_credito)
+    {
+       /*  Es 1 fecha inicio
+        Es 2 fin */
+        switch($option)
+        {
+            case 1:
+                if (Seguimiento::where('id_credito', $id_credito)->exists()) {
+                    return Carbon::parse(Seguimiento::where('id_credito', $id_credito)->orderBy('id_seguimiento', 'ASC')->get()->first()->created_at);
+                } else {
+                    return " ";
+                }
+                break;
+            case 2:
+                if (Seguimiento::where('id_credito', $id_credito)->exists()) {
+                    return Carbon::parse(Seguimiento::where('id_credito', $id_credito)->orderBy('id_seguimiento', 'ASC')->get()->last()->created_at);
+                } else {
+                    return " ";
+                }
+                break;
+        }
+        
     }
-    
+
     public function capacidadPago($id)
     {
         $capacidad = CapacidadPago::where('id_persona', $id)->exists();
         if ($capacidad) {
             $porcentaje = CapacidadPago::where('id_persona', $id)->firstOrFail()->porcentaje;
-            return $porcentaje*100;
+            return $porcentaje * 100;
         } else {
             return null;
         }
@@ -103,22 +123,29 @@ class InformeRiesgosRepository
         return $patrimonio;
     }
 
-  /*-----------------------------------------Total prestamos-----------------------------------------------*/
-  public  function obligaciones_mensuales($id)
-  {
-    $total_prestamos = DB::table('prestamo_bancario')->where('id_persona', $id)->sum('importe_ultimo_pago');
-    $tiene_capacidad = $this->amortizacionSanMartin($id) + $total_prestamos;
-    return  $tiene_capacidad;
-  }
-  public function amortizacionSanMartin($id)
-  {
-      $capacidad = CapacidadPago::where('id_persona', $id)->exists();
-      if ($capacidad) {
-          $amortizacion_coop_san_martin = CapacidadPago::where('id_persona', $id)->firstOrFail()->amortizacion_coop_san_martin;
-          return $amortizacion_coop_san_martin;
-      } else {
-          return 0;
-      }
-  }
+    /*-----------------------------------------Total prestamos-----------------------------------------------*/
+    public  function obligaciones_mensuales($id)
+    {
+        $total_prestamos = DB::table('prestamo_bancario')->where('id_persona', $id)->sum('importe_ultimo_pago');
+        $tiene_capacidad = $this->amortizacionSanMartin($id) + $total_prestamos;
+        return  $tiene_capacidad;
+    }
+    public function amortizacionSanMartin($id)
+    {
+        $capacidad = CapacidadPago::where('id_persona', $id)->exists();
+        if ($capacidad) {
+            $amortizacion_coop_san_martin = CapacidadPago::where('id_persona', $id)->firstOrFail()->amortizacion_coop_san_martin;
+            return $amortizacion_coop_san_martin;
+        } else {
+            return 0;
+        }
+    }
 
+
+    /*--------get id_tcredito------*/
+    public static function getidtipocredito($id)
+    {
+        $idtcredito = Credito::where('id_credito', $id)->get()->dia_pago;
+        return  $idtcredito;
+    }
 }

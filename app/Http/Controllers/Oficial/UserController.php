@@ -10,6 +10,7 @@ use sis5cs\Http\Requests\UserFormRequest;
 use sis5cs\Rol;
 use sis5cs\User;
 
+
 class UserController extends Controller
 {
     /**
@@ -19,9 +20,11 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-
+     
+ 
     public function index()
     {
+        
         $id_user = Auth::user()->id_users;
         $users = DB::table('users')
             ->join('rol', 'users.id_rol', '=', 'rol.id_rol')

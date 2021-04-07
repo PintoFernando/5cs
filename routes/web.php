@@ -16,8 +16,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
 Route::get('/notifications/{id}', 'NotificationsController@show')->name('notifications.show');
-Route::patch('notifications/{id}','NotificationsController@read')->name('notifications.read');
-Route::delete('notifications/{id}','NotificationsController@destroy')->name('notifications.destroy');
+Route::patch('notifications/{id}', 'NotificationsController@read')->name('notifications.read');
+Route::delete('notifications/{id}', 'NotificationsController@destroy')->name('notifications.destroy');
 Route::middleware(['auth', 'admin'])->group(function () {
     //---------------------------- CARLOS RUTAS DE ADMINISTRADOR CONFIGURACION----------------
     //datos actividad economica
@@ -60,11 +60,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/seguimiento_reporte', 'SeguimientoController@seguimiento_reporte'); //listado
     //Rutas de escritorio
     Route::get('/home/home', 'HomeController@index')->name('home');
-    
+
     //ruta seleccionar persona
     Route::get('/seleccionar/', 'SeleccionarSocioController@index');
     Route::get('/seleccionar/{id}/seleccionar', 'SeleccionarSocioController@seleccionar'); //formulario de edicion
-     //rutas de dashboard oficial de creditos
+    //rutas de dashboard oficial de creditos
     Route::get('/dashboard/', 'DashboardAdminController@index');
     //datos actividad economica
     Route::get('/actividad_economica', 'ActividadEconomicaController@index'); //listado
@@ -97,7 +97,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/capacidad_pago/{id}/edit', 'CapacidadPagoController@update'); //actualizar
     Route::delete('/capacidad_pago/{id}', 'CapacidadPagoController@destroy'); //actualizar
 
-     //Rutas Crédito
+    //Rutas Crédito
     Route::get('/credito', 'CreditoController@index'); //listado
     Route::get('/credito/create', 'CreditoController@create'); //crear
     Route::post('/credito', 'CreditoController@store'); //crear
@@ -106,7 +106,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/credito/{id}', 'CreditoController@destroy'); //actualizar
 
     //rutas de garantia
-     Route::get('/garantias/', 'GarantiaController@index'); //listado
+    Route::get('/garantias/', 'GarantiaController@index'); //listado
     Route::get('/garantias/create', 'GarantiaController@create'); //crear
     Route::post('/garantias/', 'GarantiaController@store'); //crear
     Route::get('/garantias/{id}/edit', 'GarantiaController@edit'); //formulario de edicion
@@ -121,7 +121,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/direccion/{id}/edit', 'DireccionController@update'); //actualizar
     Route::delete('/direccion/{id}', 'DireccionController@destroy'); //actualizar
 
-      //Rutas de croquis
+    //Rutas de croquis
     Route::get('/croquis/', 'CroquisController@index'); //listado
     Route::get('/croquis/create', 'CroquisController@create'); //crear
     Route::post('/croquis/', 'CroquisController@store'); //crear
@@ -129,7 +129,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/croquis/{id}/edit', 'CroquisController@update'); //actualizar
     Route::get('/croquis/{id}/edit', 'CroquisController@edit'); //actualizar
     Route::delete('/croquis/{id}', 'CroquisController@destroy'); //actualizar
-     //rutas datos empresa
+    //rutas datos empresa
     Route::get('/datos_empresa', 'DatosEmpresaController@index'); //listado
     Route::get('/datos_empresa/create', 'DatosEmpresaController@create'); //crear
     Route::post('/datos_empresa', 'DatosEmpresaController@store'); //crear
@@ -159,7 +159,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/referencias_solicitante/{id}/edit', 'ReferenciaSolicitanteController@update'); //actualizar
     Route::delete('/referencias_solicitante/{id}', 'ReferenciaSolicitanteController@destroy'); //actualizar
 
-     //ruta reporte buro
+    //ruta reporte buro
     Route::get('/reporte_buro/', 'ReporteBuroController@index'); //listado
     Route::get('/reporte_buro/create', 'ReporteBuroController@create'); //crear
     Route::post('/reporte_buro/', 'ReporteBuroController@store'); //crear
@@ -184,7 +184,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/inversiones_financieras/{id}/edit', 'InversionesFinancierasController@update'); //actualizar
     Route::delete('/inversiones_financieras/{id}', 'InversionesFinancierasController@destroy'); //actualizar
 
-     //Rutas Cuentas Documentos por Cobrar
+    //Rutas Cuentas Documentos por Cobrar
     Route::get('/cuentas_documentos_cobrar/', 'CuentasDocumentosCobrarController@index'); //listado
     Route::get('/cuentas_documentos_cobrar/create', 'CuentasDocumentosCobrarController@create'); //crear
     Route::post('/cuentas_documentos_cobrar/', 'CuentasDocumentosCobrarController@store'); //crear
@@ -272,7 +272,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/gastos_operativos/{id}/edit', 'GastosOperativosComercializacionController@update'); //actualizar
     Route::delete('/gastos_operativos/{id}', 'GastosOperativosComercializacionController@destroy'); //actualizar
 
-     //rutas de mano de obra
+    //rutas de mano de obra
     Route::get('/mano_obra/', 'ManoObraMensualController@index'); //listado
     Route::get('/mano_obra/create', 'ManoObraMensualController@create'); //crear
     Route::post('/mano_obra/', 'ManoObraMensualController@store'); //crear
@@ -291,7 +291,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/ingreso_mensual/{id}', 'IngresoMensualController@destroy'); //actualizar
 
 
-//RUTAS DE VENTA COMERCIALIZACION DE PRODUCTOS
+    //RUTAS DE VENTA COMERCIALIZACION DE PRODUCTOS
     Route::get('/venta_comercializacion_producto/', 'VentaComercializacionProductoController@index'); //listado
     Route::get('/venta_comercializacion_producto/create', 'VentaComercializacionProductoController@create'); //crear
     Route::post('/venta_comercializacion_producto/', 'VentaComercializacionProductoController@import'); //crear
@@ -305,15 +305,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
     //-------------------------------------CARLOS END----------------------------------------------
-     //rutas ventas
+    //rutas ventas
     Route::get('/ventas/crud', 'VentasController@index'); //listado
     Route::get('/ventas/crud/create', 'VentasController@create'); //crear
     Route::post('/ventas/crud', 'VentasController@store'); //crear
     Route::get('/ventas/crud/{id}/edit', 'VentasController@edit'); //formulario de edicion
     Route::post('/ventas/crud/{id}/edit', 'VentasController@update'); //actualizar
     Route::delete('/ventas/crud/{id}', 'VentasController@destroy'); //actualizar
-       
-    
+
+
     //rutas dashbord
     Route::get('/dashbord', 'DashboardController@index'); //listado
     //rutas usuario
@@ -334,8 +334,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/auditoria', 'AuditoriaController@store'); //crear
     Route::get('/auditoria/{id}/scor', 'AuditoriaController@scor'); //formulario de edicion
 
-    
-    
+
+
     //rutas codeudores
     Route::get('/codeudor/crud', 'CodeudorController@index'); //listado
     Route::get('/codeudor/crud/create', 'CodeudorController@create'); //crear
@@ -348,7 +348,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 //Rutas del rol de plataforma
 Route::middleware(['auth', 'plataforma'])->prefix('plataforma')->group(function () {
     //Rutas de Reporte solicitud Modulo reportes
-   /* Route::get('/solicitud', 'Oficial\ReportePlataformaController@solicitudOficial');
+    /* Route::get('/solicitud', 'Oficial\ReportePlataformaController@solicitudOficial');
     Route::get('/caratulas', 'Oficial\ReportePlataformaController@caratulasOficial');
     Route::get('/control_documentos', 'Oficial\ReportePlataformaController@controlDocumentos');
     Route::get('/informe_credito', 'Oficial\ReportePlataformaController@informeCredito');*/
@@ -479,7 +479,7 @@ Route::middleware(['auth', 'cliente'])->prefix('cliente')->group(function () {
     Route::patch('/user/{id}/edit_picture', 'Cliente\UserController@update_picture'); //actualizar
 });
 
-    //Rutas del rol Jefe de creditos
+//Rutas del rol Jefe de creditos
 Route::middleware(['auth', 'jefecredito'])->prefix('jefecredito')->group(function () {
     //rutas de dashboard jefe de créditos
     Route::get('/dashboard/', 'JefeCredito\DashboardJefeCreditoController@index');
@@ -817,12 +817,35 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::get('/informe_credito', 'Oficial\ReporteOficialController@informeCredito');
     //Rutas de Fotografias
     Route::get('/foto/', 'Oficial\FotoController@index'); //listado
-    Route::get('/foto/create', 'Oficial\FotoController@create'); //crear
-    Route::post('/foto/', 'Oficial\FotoController@store'); //crear
-    Route::get('/foto/{id}/edit', 'Oficial\FotoController@edit'); //formulario de edicion
-    Route::post('/foto/{id}/edit', 'Oficial\FotoController@update'); //actualizar
-    Route::delete('/foto/{id}', 'Oficial\FotoController@destroy'); //actualizar
+    Route::get('/foto/register', 'Oficial\FotoController@register');// registro de usuario para app
+    Route::get('/foto/listaregister', 'Oficial\FotoController@listaregister'); //lista los registros de socios que hay
+    Route::post('/foto/createregister', 'Oficial\FotoController@createregister');
+    Route::get('/foto/{id}/create', 'Oficial\FotoController@create'); //crear
+    Route::get('/foto/fotodetalle', 'Oficial\FotoController@fotodetalle'); //FOTO DETALLE ANTES DE CREAR
+    Route::get('/foto/fotodetalle2', 'Oficial\FotoController@fotodetalle');
+    Route::post('/foto/{id_credito}/prueba', 'Oficial\FotoController@store'); //guarda la nueva foto
+    Route::get('/foto/prueba2', 'Oficial\FotoController@index'); 
+     Route::get('/foto/intento', 'Oficial\FotoController@intento'); //lista las "carpetas" que contienen fotos
+    Route::get('/foto/{id}/listafoto', 'Oficial\FotoController@listafoto');//lista las fotos para editar eliminar
+    Route::get('/foto/{id}/agregar', 'Oficial\FotoController@agregar');//agrega nueva foto en la lista de fotos
+    Route::post('/foto/{id_seguimiento_foto}/agregar', 'Oficial\FotoController@storefoto');
+    Route::get('/foto/{id}/vistacroquis2', 'Oficial\FotoController@vistacroquis2'); //prueba2 redirecciona donde se selecciona reporte
+    Route::get('/foto/{id}/vistacroquis', 'Oficial\FotoController@vistacroquis'); //agregar solo foto
+    Route::get('/foto/{id}/vistaantesdespues', 'Oficial\FotoController@vistaantesdespues'); //prueba2 redirecciona donde se selecciona reporte
+    Route::get('/foto/{id}/vistaantesdespues2', 'Oficial\FotoController@vistaantesdespues2');
+    Route::get('/foto/{id}/prueba2', 'Oficial\FotoController@prueba2'); //prueba2 redirecciona donde se selecciona reporte
+    Route::get('/foto/{id}/prueba', 'Oficial\FotoController@prueba'); //esto selecciona el idcredito para ir a fotos
+    Route::get('/foto/{id}/createpdf/', 'Oficial\Fotocontroller@pdf');//lleva a al vista del pdf de reporte
+    Route::get('/foto/createdomiciliopdf/', 'Oficial\Fotocontroller@pdf');//lleva a la vista de croquisdomiciliopdf
+    Route::get('/foto/createantesdespuespdf/', 'Oficial\Fotocontroller@pdf');//lleva a la vista antes depsues pdf
+    Route::get('/foto/{id}/{id2}/edit', 'Oficial\FotoController@edit'); //formulario de edicion
+    Route::post('/foto/{id}/{id2}/edit', 'Oficial\FotoController@update'); //actualizar
+   // Route::delete('/foto/{id_seguimiento_foto}', 'Oficial\FotoController@destroy2'); //eliminar lista de fotos "pendiente"
+    Route::delete('/foto/{id_foto}', 'Oficial\FotoController@destroy'); //eliminar foto
     Route::get('/foto/{id}/descarga', 'Oficial\FotoController@descarga'); //actualizar
+    Route::get('/foto/{id}/edituser', 'Oficial\FotoController@edituser'); //formulario de edicion
+    Route::post('/foto/{id}/updateuser', 'Oficial\FotoController@updateuser'); 
+    
     //Rutas de archivos
     Route::get('/archivo/', 'Oficial\ArchivoController@index'); //listado
     Route::get('/archivo/create', 'Oficial\ArchivoController@create'); //crear
@@ -864,7 +887,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::get('/a_garantes/datos_empresa/{id}/edit', 'Oficial\DatosEmpresaGaranteController@edit'); //formulario de edicion
     Route::post('/a_garantes/datos_empresa/{id}/edit', 'Oficial\DatosEmpresaGaranteController@update'); //actualizar
     Route::delete('/a_garantes/datos_empresa/{id}', 'Oficial\DatosEmpresaGaranteController@destroy'); //actualizar
-//ruta actividad economica
+    //ruta actividad economica
     Route::get('/a_garantes/actividad_economica/', 'Oficial\ActividadEconomicaGaranteController@index'); //listado
     Route::get('/a_garantes/actividad_economica/create', 'Oficial\ActividadEconomicaGaranteController@create'); //crear
     Route::post('/a_garantes/actividad_economica/', 'Oficial\ActividadEconomicaGaranteController@store'); //crear
@@ -904,7 +927,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/a_garantes/cuentas_documentos_cobrar/{id}/edit', 'Oficial\CuentasDocumentosCobrarGaranteController@update'); //actualizar
     Route::delete('/a_garantes/cuentas_documentos_cobrar/{id}', 'Oficial\CuentasDocumentosCobrarGaranteController@destroy'); //actualizar
 
-     //Rutas Inventario de mercaderias
+    //Rutas Inventario de mercaderias
     Route::get('/a_garantes/inventario_mercaderia/', 'Oficial\InventarioMercaderiaGaranteController@index'); //listado
     Route::get('/a_garantes/inventario_mercaderia/create', 'Oficial\InventarioMercaderiaGaranteController@create'); //crear
     Route::post('/a_garantes/inventario_mercaderia/', 'Oficial\InventarioMercaderiaGaranteController@store'); //crear
@@ -912,7 +935,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/a_garantes/inventario_mercaderia/{id}/edit', 'Oficial\InventarioMercaderiaGaranteController@update'); //actualizar
     Route::delete('/a_garantes/inventario_mercaderia/{id}', 'Oficial\InventarioMercaderiaGaranteController@destroy'); //actualizar
 
-     //Rutas Maquinaria
+    //Rutas Maquinaria
     Route::get('/a_garantes/maquinaria_equipo/', 'Oficial\MaquinariaEquipoGaranteController@index'); //listado
     Route::get('/a_garantes/maquinaria_equipo/create', 'Oficial\MaquinariaEquipoGaranteController@create'); //crear
     Route::post('/a_garantes/maquinaria_equipo/', 'Oficial\MaquinariaEquipoGaranteController@store'); //crear
@@ -960,7 +983,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/a_garantes/prestamo_bancario/{id}/edit', 'Oficial\PrestamoBancarioGaranteController@update'); //actualizar
     Route::delete('/a_garantes/prestamo_bancario/{id}', 'Oficial\PrestamoBancarioGaranteController@destroy'); //actualizar
 
-     //Rutas Cuentas por Pagar
+    //Rutas Cuentas por Pagar
     Route::get('/a_garantes/cuentas_por_pagar/', 'Oficial\CuentasPagarGaranteController@index'); //listado
     Route::get('/a_garantes/cuentas_por_pagar/create', 'Oficial\CuentasPagarGaranteController@create'); //crear
     Route::post('/a_garantes/cuentas_por_pagar/', 'Oficial\CuentasPagarGaranteController@store'); //crear
@@ -969,7 +992,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::delete('/a_garantes/cuentas_por_pagar/{id}', 'Oficial\CuentasPagarGaranteController@destroy'); //actualizar
 
 
- //Rutas Capacidad de pago garante
+    //Rutas Capacidad de pago garante
     Route::get('/a_garantes/capacidad_pago/', 'Oficial\CapacidadPagoGaranteController@index'); //listado
     Route::get('/a_garantes/capacidad_pago/create', 'Oficial\CapacidadPagoGaranteController@create'); //crear
     Route::post('/a_garantes/capacidad_pago/', 'Oficial\CapacidadPagoGaranteController@store'); //crear
@@ -1018,7 +1041,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::get('/a_garantes/ingreso_mensual/{id}/edit', 'Oficial\IngresoMensualGaranteController@edit'); //formulario de edicion
     Route::post('/a_garantes/ingreso_mensual/{id}/edit', 'Oficial\IngresoMensualGaranteController@update'); //actualizar
 
-   //RUTAS DE VENTA COMERCIALIZACION DE PRODUCTOS
+    //RUTAS DE VENTA COMERCIALIZACION DE PRODUCTOS
     Route::get('/a_garantes/venta_comercializacion_producto/', 'Oficial\VentaComercializacionProductoGaranteController@index'); //listado
     Route::get('/a_garantes/venta_comercializacion_producto/create', 'Oficial\VentaComercializacionProductoGaranteController@create'); //crear
     Route::post('/a_garantes/venta_comercializacion_producto/', 'Oficial\VentaComercializacionProductoGaranteController@import'); //crear
@@ -1033,7 +1056,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::get('/a_garantes/formulario/', 'Oficial\FormularioGaranteController@index'); //listado
     Route::get('/a_garantes/formulario/{id}/formulario', 'Oficial\FormularioGaranteController@formulario'); //formulario de edicion
 
-     //Rutas Efectivos en Caja
+    //Rutas Efectivos en Caja
     Route::get('/a_garantes/efectivos_caja/', 'Oficial\EfectivoCajaGaranteController@index'); //listado
     Route::get('/a_garantes/efectivos_caja/create', 'Oficial\EfectivoCajaGaranteController@create'); //crear
     Route::post('/a_garantes/efectivos_caja/', 'Oficial\EfectivoCajaGaranteController@store'); //crear
@@ -1068,7 +1091,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
 
     //-------------------------------RUTAS CODEUDORES BEGIN-------------------------
 
- //Rutas asignar codeudor existente
+    //Rutas asignar codeudor existente
     Route::get('/a_codeudores/asignar_codeudor/', 'Oficial\AsignarCodeudorController@index');
     Route::get('/a_codeudores/asignar_codeudor/{id}/asignar', 'Oficial\AsignarCodeudorController@asignar'); //formulario de edicion
     //Rutas Conyugues
@@ -1094,7 +1117,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::get('/a_codeudores/croquis/{id}/edit', 'Oficial\CroquisCodeudorController@edit'); //actualizar
     Route::delete('/a_codeudores/croquis/{id}', 'Oficial\CroquisCodeudorController@destroy'); //actualizar
 
- //ruta datos empresa
+    //ruta datos empresa
     Route::get('/a_codeudores/datos_empresa/', 'Oficial\DatosEmpresaCodeudorController@index'); //listado
     Route::get('/a_codeudores/datos_empresa/create', 'Oficial\DatosEmpresaCodeudorController@create'); //crear
     Route::post('/a_codeudores/datos_empresa/', 'Oficial\DatosEmpresaCodeudorController@store'); //crear
@@ -1111,7 +1134,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::delete('/a_codeudores/actividad_economica/{id}', 'Oficial\ActividadEconomicaCodeudorController@destroy'); //actualizar
 
 
-//Rutas Referencias Del Codeudor
+    //Rutas Referencias Del Codeudor
     Route::get('/a_codeudores/referencias_solicitante/', 'Oficial\ReferenciaSolicitanteCodeudorController@index'); //listado
     Route::get('/a_codeudores/referencias_solicitante/create', 'Oficial\ReferenciaSolicitanteCodeudorController@create'); //crear
     Route::post('/a_codeudores/referencias_solicitante/', 'Oficial\ReferenciaSolicitanteCodeudorController@store'); //crear
@@ -1143,7 +1166,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/a_codeudores/cuentas_documentos_cobrar/{id}/edit', 'Oficial\CuentasDocumentosCobrarCodeudorController@update'); //actualizar
     Route::delete('/a_codeudores/cuentas_documentos_cobrar/{id}', 'Oficial\CuentasDocumentosCobrarCodeudorController@destroy'); //actualizar
 
-     //Rutas Inventario de mercaderias
+    //Rutas Inventario de mercaderias
     Route::get('/a_codeudores/inventario_mercaderia/', 'Oficial\InventarioMercaderiaCodeudorController@index'); //listado
     Route::get('/a_codeudores/inventario_mercaderia/create', 'Oficial\InventarioMercaderiaCodeudorController@create'); //crear
     Route::post('/a_codeudores/inventario_mercaderia/', 'Oficial\InventarioMercaderiaCodeudorController@store'); //crear
@@ -1151,7 +1174,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/a_codeudores/inventario_mercaderia/{id}/edit', 'Oficial\InventarioMercaderiaCodeudorController@update'); //actualizar
     Route::delete('/a_codeudores/inventario_mercaderia/{id}', 'Oficial\InventarioMercaderiaCodeudorController@destroy'); //actualizar
 
-     //Rutas Maquinaria
+    //Rutas Maquinaria
     Route::get('/a_codeudores/maquinaria_equipo/', 'Oficial\MaquinariaEquipoCodeudorController@index'); //listado
     Route::get('/a_codeudores/maquinaria_equipo/create', 'Oficial\MaquinariaEquipoCodeudorController@create'); //crear
     Route::post('/a_codeudores/maquinaria_equipo/', 'Oficial\MaquinariaEquipoCodeudorController@store'); //crear
@@ -1199,7 +1222,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::post('/a_codeudores/prestamo_bancario/{id}/edit', 'Oficial\PrestamoBancarioCodeudorController@update'); //actualizar
     Route::delete('/a_codeudores/prestamo_bancario/{id}', 'Oficial\PrestamoBancarioCodeudorController@destroy'); //actualizar
 
-     //Rutas Cuentas por Pagar
+    //Rutas Cuentas por Pagar
     Route::get('/a_codeudores/cuentas_por_pagar/', 'Oficial\CuentasPagarCodeudorController@index'); //listado
     Route::get('/a_codeudores/cuentas_por_pagar/create', 'Oficial\CuentasPagarCodeudorController@create'); //crear
     Route::post('/a_codeudores/cuentas_por_pagar/', 'Oficial\CuentasPagarCodeudorController@store'); //crear
@@ -1209,7 +1232,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
 
 
 
- //Rutas Capacidad de pago garante
+    //Rutas Capacidad de pago garante
     Route::get('/a_codeudores/capacidad_pago/', 'Oficial\CapacidadPagoCodeudorController@index'); //listado
     Route::get('/a_codeudores/capacidad_pago/create', 'Oficial\CapacidadPagoCodeudorController@create'); //crear
     Route::post('/a_codeudores/capacidad_pago/', 'Oficial\CapacidadPagoCodeudorController@store'); //crear
@@ -1257,7 +1280,7 @@ Route::middleware(['auth', 'oficialcredito'])->prefix('oficial')->group(function
     Route::get('/a_codeudores/ingreso_mensual/{id}/edit', 'Oficial\IngresoMensualCodeudorController@edit'); //formulario de edicion
     Route::post('/a_codeudores/ingreso_mensual/{id}/edit', 'Oficial\IngresoMensualCodeudorController@update'); //actualizar
 
-   //RUTAS DE VENTA COMERCIALIZACION DE PRODUCTOS
+    //RUTAS DE VENTA COMERCIALIZACION DE PRODUCTOS
     Route::get('/a_codeudores/venta_comercializacion_producto/', 'Oficial\VentaComercializacionProductoCodeudorController@index'); //listado
     Route::get('/a_codeudores/venta_comercializacion_producto/create', 'Oficial\VentaComercializacionProductoCodeudorController@create'); //crear
     Route::post('/a_codeudores/venta_comercializacion_producto/', 'Oficial\VentaComercializacionProductoCodeudorController@import'); //crear
@@ -1311,9 +1334,11 @@ Route::middleware(['auth', 'riesgos'])->prefix('riesgos')->group(function () {
     Route::patch('/user/{id}/edit_datos', 'Riesgos\UserController@update_datos'); //actualizar
     Route::patch('/user/{id}/edit_picture', 'Riesgos\UserController@update_picture'); //actualizar
     //--------------------------------------RUTAS GENERAR INFORME--------------------------------------
+    Route::get('/generar', 'Riesgos\InformeController@ejecutar'); //crear
     Route::get('/consumo_sola_firma', 'Riesgos\InformeController@consumo_sola_firma'); //crear
     Route::get('/garantes', 'Riesgos\InformeController@garantes'); //crear
-    Route::get('/hipotecaria', 'Riesgos\InformeController@garantia_hipotecaria'); 
+    Route::get('/hipotecaria', 'Riesgos\InformeController@garantia_hipotecaria');
+    Route::get('/prendaria', 'Riesgos\InformeController@garantia_prendaria');
 });
 
 //RUTAS ROL DE ASESORIA
@@ -1345,12 +1370,12 @@ Route::middleware(['auth', 'asesoria'])->prefix('asesoria')->group(function () {
     //--------------------------GENERACION DE DOCUMENTOS------------------------------------------
     Route::get('/contrato/consumo_sola_firma', 'Asesoria\ContratosController@consumo_sola_firma'); //crear
     Route::get('/contrato/consumo', 'Asesoria\ContratosController@consumo'); //crear
-    Route::get('/contrato/consumo_garantia_hipotecaria', 'Asesoria\ContratosController@consumo_garantia_hipotecaria'); 
-    Route::get('/contrato/credito_vivienda', 'Asesoria\ContratosController@credito_vivienda'); 
-    Route::get('/contrato/hipotecario_vivienda', 'Asesoria\ContratosController@hipotecario_vivienda'); 
-    Route::get('/contrato/microcredito', 'Asesoria\ContratosController@microcredito'); 
-    Route::get('/contrato/microcredito_sola_firma', 'Asesoria\ContratosController@microcreditoAsolaFirma'); 
-    Route::get('/contrato/microcredito_garantia_hipotecaria', 'Asesoria\ContratosController@microcreditoGarantiaHipotecaria'); 
+    Route::get('/contrato/consumo_garantia_hipotecaria', 'Asesoria\ContratosController@consumo_garantia_hipotecaria');
+    Route::get('/contrato/credito_vivienda', 'Asesoria\ContratosController@credito_vivienda');
+    Route::get('/contrato/hipotecario_vivienda', 'Asesoria\ContratosController@hipotecario_vivienda');
+    Route::get('/contrato/microcredito', 'Asesoria\ContratosController@microcredito');
+    Route::get('/contrato/microcredito_sola_firma', 'Asesoria\ContratosController@microcreditoAsolaFirma');
+    Route::get('/contrato/microcredito_garantia_hipotecaria', 'Asesoria\ContratosController@microcreditoGarantiaHipotecaria');
     //--------------------------Rutas generacion de documentos-----------------------------------
 
 });

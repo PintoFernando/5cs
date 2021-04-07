@@ -49,6 +49,7 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
+        
         if (auth()->user()->id_rol == 1) {
             return $this->redirectTo;
         }
@@ -56,6 +57,7 @@ class LoginController extends Controller
             return $this->redirectTojefe;
         }
         if (auth()->user()->id_rol == 3) {
+        
             return $this->redirectTooficial;
         }
         if (auth()->user()->id_rol == 4) {

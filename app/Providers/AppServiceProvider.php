@@ -4,6 +4,8 @@ namespace sis5cs\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //añadido
         Carbon::setLocale(config('app.locale'));
+        Schema::defaultStringLength(191);
+
     }
 
     /**

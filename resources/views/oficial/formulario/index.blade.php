@@ -1199,16 +1199,12 @@ $act_eco_cont++;
     </tr>
 
     <tr>
-      <th class="table-celda-naranja-izquierda">Impuestos (Anual del Vehículo)</th>
+      <th class="table-celda-naranja-izquierda">Impuestos</th>
       <td></td>
       <td class="table-celda-derecha">{{number_format($ope->impuestos,2,',', '.')}} </td>
     </tr>
 
-    <tr>
-      <th class="table-celda-naranja-izquierda">Impuestos (Anual del SOAT)</th>
-      <td></td>
-      <td class="table-celda-derecha">0,00</td>
-    </tr>
+ 
 	
 	<tr>
       <th class="table-celda-naranja-izquierda">Alquiler</th>

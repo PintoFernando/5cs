@@ -15,7 +15,7 @@
 </div>
 </div>
 
-<form method="post" action="{{url('/oficial/foto/'.$foto->id_foto.'/edit')}}" enctype="multipart/form-data">
+<form method="post" action="{{url('/oficial/foto/'.$foto->id_foto.'/'.$i.'/edit')}}" enctype="multipart/form-data">
   {{csrf_field()}}
   <div class="row">
 
@@ -32,16 +32,9 @@
 
  <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
    <div class="form-group">
-     <label>Categoria</label>
-     <select name="id_categoria_foto" class="form-control selectpicker" data-size="5" id="id_categoria_foto" data-live-search="true">
-       @foreach ($categoria as $ca)
-       @if($ca->id_categoria_foto==$foto->id_categoria_foto)
-       <option value="{{$ca->id_categoria_foto}}" selected>{{$ca->categoria}}</option>
-       @else
-       <option value="{{$ca->id_categoria_foto}}">{{$ca->categoria}}</option>
-       @endif
-       @endforeach
-     </select> 
+   <label for="fotografia">Detalle</label>
+     <div> <textarea name ="detalle" rows="3"  cols="44">{{$foto->detalle}}</textarea></div>
+     
    </div>
  </div>
 
